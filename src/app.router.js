@@ -5,6 +5,8 @@ import categoryRouter from './modules/category/category.router.js';
 import productRouter from './modules/product/product.router.js';
 import couponRouter from './modules/coupon/coupon.router.js';
 import cartRouter from './modules/cart/cart.router.js';
+import orderRouter from './modules/order/order.router.js';
+import reviewRouter from './modules/review/review.router.js';
 
 const initApp = async(app,express)=>{
 
@@ -21,6 +23,9 @@ const initApp = async(app,express)=>{
     app.use('/products',productRouter);
     app.use('/coupons',couponRouter);
     app.use('/carts',cartRouter);
+    app.use('/orders',orderRouter);
+    app.use('/reviews',reviewRouter);
+
 
     app.get('*',(req,res)=>{
         return res.status(404).json({message:"page not found"});

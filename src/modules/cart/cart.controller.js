@@ -10,6 +10,7 @@ export const addToCart = async(req,res)=>{
             userId:req.id,
             products:{productId}
         });
+        return res.status(200).json({message:"success",cart:newCart});
     }
 
     for(let i=0; i<cart.products.length; i++){

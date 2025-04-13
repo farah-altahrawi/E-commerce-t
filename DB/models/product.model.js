@@ -26,6 +26,9 @@ const productSchema = new Schema (
             type:Number,
             default:0,  
         },
+        priceAfterDiscount:{
+            type:Number,
+        },
         slug: {
             type:String,
             required:true,
@@ -68,8 +71,16 @@ const productSchema = new Schema (
     },
     {
         timestamps: true,
+        toJSON:{virtuals:true},
+        toObject:{virtuals:true},
     }
 );
+
+productSchema.virtual('reviews',{
+    ref:'Review',
+    localField:'_id',
+    foreignField:'productId'
+});
 
 const productModel = mongoose.model.Product || model('Product',productSchema);
 export default productModel; 

@@ -6,7 +6,7 @@ import cloudinary from "../../utils/cloudinary.js";
 
 export const create = async (req,res)=>{
     
-    const {name,categoryId} = req.body; 
+    const {name,categoryId,discount,price} = req.body; 
 
     //return res.json(req.files);
     const checkCategory = await categoryModel.findById(categoryId);
@@ -38,6 +38,8 @@ export const create = async (req,res)=>{
     req.body.createdBy = req.id;
     req.body.updatedBy = req.id;
 
+    req.body.priceAfterDiscount = price - (price * (discount || 0) /100);
+
     const product = await productModel.create(req.body);
     return res.status(201).json({message:"success",product});
 }
@@ -58,7 +60,7 @@ export const getDetails = async (req,res)=>{
 
     const {id} = req.params;
 
-    const product = await productModel.findById(id).select('-discount');
+    const product = await productModel.findById(id).select('-discount').populate('reviews');
     return res.status(200).json({message:"success",product});
 }
 

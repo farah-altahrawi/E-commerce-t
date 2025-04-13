@@ -34,7 +34,7 @@ const orderSchema = new Schema (
                 },
         }],
         couponName:{
-            type:Name,
+            type:String,
         },
         finalPrice:{
             type:Number,
@@ -44,6 +44,14 @@ const orderSchema = new Schema (
             type:String,
             default:'cash',
             enum:['cash','card'],
+        },
+        phoneNumber:{
+            type:Number,
+            required:true,
+        },
+        address:{
+            type:String,
+            required:true,
         },
         status:{
             type:String,
